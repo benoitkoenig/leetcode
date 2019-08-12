@@ -1,0 +1,22 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "median-of-two-sorted-arrays-test.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benoitkoenig/leetcode.git"
+  },
+  "author": "Benoit Koenig",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benoitkoenig/leetcode/issues"
+  },
+  "homepage": "https://github.com/benoitkoenig/leetcode#readme",
+  "dependencies": {
+    "jest": "^24.8.0"
+  }
+}
