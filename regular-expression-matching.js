@@ -4,21 +4,21 @@
  * @return {boolean}
  */
 
-const isMatch = (s, p, index_s=0, index_p=0) => {
-  if ((s.length === index_s) && (p.length === index_p)) {
+const isMatch = (s, p, indexS = 0, indexP = 0) => {
+  if ((s.length === indexS) && (p.length === indexP)) {
     return true;
   }
-  if ((p.length > index_p + 1) && (p[index_p + 1] === '*')) {
-    for (let i=0 ; i<=s.length - index_s ; i++) {
-      if (isMatch(s, p, index_s + i, index_p + 2)) {
+  if ((p.length > indexP + 1) && (p[indexP + 1] === '*')) {
+    for (let i = 0; i <= s.length - indexS; i += 1) {
+      if (isMatch(s, p, indexS + i, indexP + 2)) {
         return true;
       }
-      if ((s[index_s + i] !== p[index_p]) && (p[index_p] !== '.')) {
+      if ((s[indexS + i] !== p[indexP]) && (p[indexP] !== '.')) {
         break;
       }
     }
-  } else if (((p[index_p] === '.') || (p[index_p] === s[index_s])) && s.length !== index_s) {
-    if (isMatch(s, p, index_s + 1, index_p + 1)) {
+  } else if (((p[indexP] === '.') || (p[indexP] === s[indexS])) && s.length !== indexS) {
+    if (isMatch(s, p, indexS + 1, indexP + 1)) {
       return true;
     }
   }
@@ -27,4 +27,4 @@ const isMatch = (s, p, index_s=0, index_p=0) => {
 
 module.exports = {
   isMatch,
-}
+};

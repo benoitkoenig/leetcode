@@ -10,14 +10,14 @@ const dumbSolution = (nums1, nums2) => {
   }
   const lowerMedian = allNums[allNums.length / 2 - 1];
   const higherMedian = allNums[allNums.length / 2];
-  return .5 * (lowerMedian + higherMedian);
-}
+  return 0.5 * (lowerMedian + higherMedian);
+};
 
 const randint = (max) => Math.floor(Math.random() * max);
 
-const getRandomSortedList = (length) => {
-  return Array(length).fill(0).map(() => (2 * randint(5))).sort((a, b) => (a - b));
-}
+const getRandomSortedList = (length) => (
+  Array(length).fill(0).map(() => (2 * randint(5))).sort((a, b) => (a - b))
+);
 
 describe('dumbSolution', () => {
   it('should return median value', () => {
@@ -42,7 +42,7 @@ describe('getKthElement', () => {
 
 describe('findMedianSortedArrays', () => {
   it('should have the same result as dumbSolution', () => {
-    for (i=0 ; i<10000 ; i++) {
+    for (let i = 0; i < 10000; i += 1) {
       const nums1 = getRandomSortedList(randint(10));
       const nums2 = getRandomSortedList(randint(10));
       if ((nums1.length !== 0) || (nums2.length !== 0)) {
