@@ -1,4 +1,4 @@
-module Pack(main) where
+module Pack(main, pack) where
 
 import System.Environment
 import Data.List
