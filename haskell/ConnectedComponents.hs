@@ -1,21 +1,22 @@
 module ConnectedComponents(main) where
 
-import Control.Applicative (liftA2)
+import Data.List
 import Data.Set (toList, fromList)
 
-contains :: [Int] -> (Int, Int) -> Bool
-contains a (b, c) = or $ map (liftA2 (||) (b==) (c==)) a
+getConnectedElements :: [(Int, Int)] -> (Int, Int) -> [(Int, Int)]
+getConnectedElements edges edge = edge:(concat $ map (getConnectedElements (edges \\ neighbors)) neighbors)
+  where neighbors = filter (\(a, b) -> a == fst edge || a == snd edge || b == fst edge || b == snd edge) edges
 
-getConnectedElements :: [(Int, Int)] -> Int -> [Int]
-getConnectedElements edges x = x:(concat $ map (getConnectedElements newEdges) neighbors)
-  where neighbors = map (\(a, b) -> if a == x then b else a) $ filter (contains [x]) edges
-        newEdges = filter (not . (contains [x])) edges
+connectedEdges :: [(Int, Int)] -> [[(Int, Int)]]
+connectedEdges [] = []
+connectedEdges edges = newComponent:(connectedEdges edgesLeft)
+  where initEdge = head edges
+        newComponent = getConnectedElements (edges \\ [initEdge]) initEdge
+        edgesLeft = edges \\ newComponent
 
-connectedComponents :: [(Int, Int)] -> [[Int]]
-connectedComponents [] = []
-connectedComponents edges = newComponent:(connectedComponents edgesLeft)
-  where newComponent = toList $ fromList $ getConnectedElements edges $ (fst . head) edges
-        edgesLeft = filter (not . (contains newComponent)) edges
+removeDuplicate = toList . fromList
+
+connectedComponents = (map (removeDuplicate . (concatMap (\(a, b) -> [a, b])))) . connectedEdges
 
 main :: IO ()
 main = do
